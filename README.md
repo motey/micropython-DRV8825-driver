@@ -14,7 +14,7 @@ A micropython class to controll a stepper motor with a DRV8825 driver (on a Rasp
 
 ### synchronous example 1
 
-A very basic example, that makes the motor turn two clockwise revolutions in approximately 0.5 seconds
+A very basic example, that makes the motor turn three steps clockwise and afterwards two clockwise revolutions in approximately 0.5 seconds
 The motor will run in [full step mode](https://www.youtube.com/watch?v=dmk6zIkj7WM).
 
 ```python
@@ -24,6 +24,7 @@ m = DRV8825StepperMotor(
     enable_pin=Pin(6, Pin.OUT),
     mode_pins=(Pin(7, Pin.OUT), Pin(8, Pin.OUT), Pin(9, Pin.OUT)),
 )
+m.step(3)
 m.rotate(2, clockwise=True)
 ```
 ### synchronous example 2
