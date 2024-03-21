@@ -1,7 +1,7 @@
 # micropython-DRV8825-driver
 A micropython class to controll a stepper motor with a DRV8825 driver (on a Raspberry Pico board)
 
-> :info: This is not a "official" library. Just some code i wrote and maybe it can be help you.
+> ℹ️ This is not a "official" library. Just some code i wrote and maybe it can be help you.
 
 > :warning: I tested this with only with a Raspberry Pico and a cheap noname nema17 motor. if your setup is different your mileage may vary.
 
