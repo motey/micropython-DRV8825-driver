@@ -6,6 +6,23 @@ A micropython class to control a stepper motor with a DRV8825 driver (on a Raspb
 > :warning: I tested this with only with a Raspberry Pico and a cheap noname nema17 motor. if your setup is different your mileage may vary.
 
 
+- [micropython-DRV8825-driver](#micropython-drv8825-driver)
+  - [Examples](#examples)
+    - [synchronous methods](#synchronous-methods)
+      - [synchronous example 1 - steps()](#synchronous-example-1---steps)
+      - [synchronous example 2 - rotate()](#synchronous-example-2---rotate)
+      - [synchronous example 3 - rotate\_while()](#synchronous-example-3---rotate_while)
+    - [non blocking methods](#non-blocking-methods)
+      - [non blocking example 1 - steps\_non\_blocking()](#non-blocking-example-1---steps_non_blocking)
+      - [non blocking example 2 - rotate\_non\_blocking()](#non-blocking-example-2---rotate_non_blocking)
+      - [non blocking example 3 - rotate\_while\_non\_blocking()](#non-blocking-example-3---rotate_while_non_blocking)
+    - [asynchronous methods](#asynchronous-methods)
+      - [asynchronous example 1](#asynchronous-example-1)
+  - [Installation](#installation)
+    - [Install typing support](#install-typing-support)
+    - [local code completion in VSCode for board libs](#local-code-completion-in-vscode-for-board-libs)
+
+
 ## Examples
 
 (ToDo: Add image of eletronic setup)
