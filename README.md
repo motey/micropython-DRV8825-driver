@@ -31,8 +31,8 @@ A micropython class to control a stepper motor with a DRV8825 driver (on a Raspb
 
 Synchronous mode is the most simple method to turn the stepper motor. It is straightforward, easy to understand and easy to reimplement when you just want to re-use snippets of this class.
 As a blocking function is comes with some caveats:  
-    * The speed can vary based the work load of the microcontroller.  
-    * You can not do anything else until the motor movement is finished.  
+- The speed can vary based the work load of the microcontroller.  
+- You can not do anything else until the motor movement is finished.  
 
 #### synchronous example 1 - steps()
 
