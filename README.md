@@ -30,9 +30,9 @@ A micropython class to control a stepper motor with a DRV8825 driver (on a Raspb
 ### synchronous methods
 
 Synchronous mode is the most simple method to turn the stepper motor. It is straightforward, easy to understand and easy to reimplement when you just want to re-use snippets of this class.
-As a blocking function is comes with some caveats:
-    * The speed can vary based the work load of the microcontroller.
-    * You can not do anything else until the motor movement is finished.
+As a blocking function is comes with some caveats:  
+    * The speed can vary based the work load of the microcontroller.  
+    * You can not do anything else until the motor movement is finished.  
 
 #### synchronous example 1 - steps()
 
@@ -132,8 +132,8 @@ m.sleep()
 
 #### non blocking example 2 - rotate_non_blocking()
 
-This example will make the motor do one revolution. During the rotation the console will print 'Do other stuff while the motor is rotating'.
-When the movement is finished the console will print 'Motor has done 200.0 steps in 500 ms'
+This example will make the motor do one revolution. During the rotation the console will print `Do other stuff while the motor is rotating`.
+When the movement is finished the console will print `Motor has done 200.0 steps in 500 ms`
 
 ```python
 m = DRV8825StepperMotor(
@@ -161,7 +161,7 @@ m.sleep()
 #### non blocking example 3 - rotate_while_non_blocking()
 
 This example
-The console output can be something like "You pressed the button after 3.41 seconds. The motor did 2728.0 steps in this time"
+The console output can be something like `You pressed the button after 3.41 seconds. The motor did 2728.0 steps in this time`
 ```python
 m = DRV8825StepperMotor(
     step_pin=Pin(4, Pin.OUT),
@@ -198,9 +198,8 @@ m.sleep()
 
 #### asynchronous example 1
 
-An example, that makes the motor turn as long a the button on pin 12 is pressed. 
+An example, that makes the motor turn as long a the button on pin 12 is pressed.  
 The motor will run in 1/16 stepping mode.
-At the end the motor will be shut down (sleep mode)
 
 ```python
 m = DRV8825StepperMotor(
