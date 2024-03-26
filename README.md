@@ -5,6 +5,7 @@ A micropython class to control a stepper motor with a DRV8825 driver (on a Raspb
 
 > :warning: I tested this with only with a Raspberry Pico and a cheap noname nema17 motor. if your setup is different your mileage may vary.
 
+> ℹ️: This lib may be a little bit overengineered depending on your usecase. You may want to cherrypick some methods and build a slimmer lib based on this one.
 
 - [micropython-DRV8825-driver](#micropython-drv8825-driver)
   - [Examples](#examples)
@@ -160,7 +161,7 @@ m.sleep()
 
 #### non blocking example 3 - rotate_while_non_blocking()
 
-This example
+This example will spin the motor until a button (on PIN 15) is pressed.
 The console output can be something like `You pressed the button after 3.41 seconds. The motor did 2728.0 steps in this time`
 ```python
 m = DRV8825StepperMotor(
@@ -174,16 +175,16 @@ m = DRV8825StepperMotor(
     target_time_for_one_revolution_ms=500,
 )
 
-button = Pin(15, Pin.IN, pull=1)
+button = Pin(15, Pin.IN, pull=Pin.PULL_UP)
 
 
-def button_is_pressed():
+def button_is_not_pressed():
     return bool(button.value())
 
 
-res = m.rotate_while_non_blocking(button_is_pressed)
+res = m.rotate_while_non_blocking(button_is_not_pressed)
 while not res.done:
-    # you can do thing here
+    # you can do things here
     pass
 print(
     f"You pressed the button after {res.get_run_time_ms() / 1000} seconds. The motor did {res.get_steps_done()} steps in this time"
@@ -193,7 +194,7 @@ m.sleep()
 
 ### asynchronous methods
 
-> :warning: Async method are still work in progress
+> :warning: Async method examples are still work in progress
 
 
 #### asynchronous example 1
@@ -202,6 +203,7 @@ An example, that makes the motor turn as long a the button on pin 12 is pressed.
 The motor will run in 1/16 stepping mode.
 
 ```python
+import uasyncio
 m = DRV8825StepperMotor(
     step_pin=Pin(4, Pin.OUT),
     direction_pin=Pin(5, Pin.OUT),
@@ -209,15 +211,17 @@ m = DRV8825StepperMotor(
     sleep_pin=Pin(3, Pin.OUT),
     enable_pin=Pin(6, Pin.OUT),
     mode_pins=(Pin(7, Pin.OUT), Pin(8, Pin.OUT), Pin(9, Pin.OUT)),
-    mode=DRV8825Modes.ONE_16,
+    mode=DRV8825StepperMotor.MODE_FULL,
     target_time_for_one_revolution_ms=1000,
 )
-btn = Pin(12)
-async def button_is_pressed() -> bool:
-    return bool(btn.value())
+button = Pin(15, Pin.IN, pull=Pin.PULL_UP)
 
-import uasyncio
-uasyncio.run(m.async_rotate_while(button_is_pressed, clockwise=True))
+def button_is_not_pressed():
+    return bool(button.value())
+
+res: DRV8825StepperMotor.MotorMoveResult = uasyncio.run(
+    m.rotate_while_async(button_is_not_pressed, clockwise=True)
+)
 ```
 
 
