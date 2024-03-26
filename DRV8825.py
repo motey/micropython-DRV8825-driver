@@ -1,6 +1,6 @@
 from typing import Tuple, Literal, Callable, Awaitable, Optional, Dict, Any
 from machine import Pin, Timer
-from utime import sleep_us
+import utime
 import uasyncio
 import math
 
@@ -317,7 +317,7 @@ class DRV8825StepperMotor:
         if clockwise:
             self.direction_clockwise(clockwise)
         for i in range(amount * 2):
-            sleep_us(self.pulse_delay_us + self.pulse_delay_offset_blocking_step)
+            utime.sleep_us(self.pulse_delay_us + self.pulse_delay_offset_blocking_step)
             self.pulse()
 
     def rotate(
