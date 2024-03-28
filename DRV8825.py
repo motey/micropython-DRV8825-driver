@@ -72,11 +72,11 @@ class DRV8825StepperMotor:
                 ]
             ] = None,
         ):
-            if target_steps and keep_running_check_callback:
+            if target_steps is not None and keep_running_check_callback is not None:
                 raise ValueError(
                     f"Either set 'target_steps' or 'keep_running_check_callback', not both."
                 )
-            elif not target_steps and not keep_running_check_callback:
+            elif target_steps is None and keep_running_check_callback is None:
                 raise ValueError(
                     f"Either set 'target_steps' or 'keep_running_check_callback'."
                 )
@@ -150,14 +150,17 @@ class DRV8825StepperMotor:
             for mp in mode_pins:
                 self.mode_pins.append(self._to_output_pin(mp))
         self.fault_pin = self._to_output_pin(fault_pin)
-        self.full_steps_for_one_revolution = full_steps_for_one_revolution
-        self.target_time_for_one_revolution_ms = target_time_for_one_revolution_ms
-        self.set_rotation_speed(target_time_for_one_revolution_ms)
-
-        self.mode = mode
-
         self.pulse_delay_us: float = 0.0
         self.steps_for_one_revolution = 0
+        self.full_steps_for_one_revolution = full_steps_for_one_revolution
+        self.target_time_for_one_revolution_ms = target_time_for_one_revolution_ms
+
+        self.mode = mode
+        self.set_rotation_speed(target_time_for_one_revolution_ms)
+
+        
+
+
 
         if not skip_motor_init:
             self._init_motor()
