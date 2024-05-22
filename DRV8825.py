@@ -314,7 +314,7 @@ class DRV8825StepperMotor:
             amount (int, optional): _description_. Defaults to 1.
             clockwise (bool, optional): _description_. Defaults to None.
         """
-        if clockwise:
+        if clockwise is not None:
             self.direction_clockwise(clockwise)
         for i in range(amount * 2):
             utime.sleep_us(self.pulse_delay_us + self.pulse_delay_offset_blocking_step)
@@ -346,7 +346,7 @@ class DRV8825StepperMotor:
             while_check_func (Callable[[], bool]): _description_
             clockwise (bool, optional): _description_. Defaults to None.
         """
-        if clockwise:
+        if clockwise is not None:
             self.direction_clockwise(clockwise)
         while while_check_func():
             self.steps(1)
@@ -363,7 +363,7 @@ class DRV8825StepperMotor:
         timer_container: NonBlockTimerContainer,
         clockwise: Optional[bool] = None,
     ):
-        if clockwise:
+        if clockwise is not None:
             self.direction_clockwise(clockwise)
 
         self._timer_container = timer_container
@@ -449,7 +449,7 @@ class DRV8825StepperMotor:
         Returns:
             MotorMoveResult: _description_
         """
-        if clockwise:
+        if clockwise is not None:
             self.direction_clockwise(clockwise)
 
         timer_container = DRV8825StepperMotor.NonBlockTimerContainer(
